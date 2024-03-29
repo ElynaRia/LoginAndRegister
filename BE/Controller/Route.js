@@ -8,7 +8,7 @@ const cors = require('cors');
 
 
 // controller
-router.post('/signup', cors(), (req, res) => {
+router.post('/signup', (req, res) => {
     KOLEKSI.findOne({ nama: req.body.nama })
         .then(x => {
             if (x) {
@@ -48,7 +48,7 @@ router.post('/signin', (req, res) => {
 })
 
 
-router.post('/', cors(), VerifyToken)
+router.post('/', VerifyToken)
 
 
 module.exports = router;

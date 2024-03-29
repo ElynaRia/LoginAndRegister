@@ -17,10 +17,10 @@ async function koneksi() { await mongoose.connect(API) };
 
 
 // middleware
-// app.use(cors());
+app.use(cors());
 app.use(bodyParser.json({ limit: "10mb" }))
 app.use(bodyParser.urlencoded({ extended: false }))
-app.use("/api", router);
+app.use(router);
 
 
 
@@ -35,7 +35,7 @@ app.listen(4000, () => {
 });
 
 const ABC = {
-    nama: "PPPPPPPP"
+    nama: "srgs"
 }
 app.get("/", (req, res) => {
     res.send(ABC.nama)
