@@ -98,6 +98,16 @@ export default function Profil() {
     }
 
 
+    async function TesT() {
+         await axios.post(Hostname + '/tes',{nama:nama,type:"TES"})
+        .then((x)=>{
+            alert(x.data)
+        })
+        .catch(()=>{
+            alert('NOoooO');
+        })
+    }
+
 
     useEffect(() => {
         Check()
@@ -109,15 +119,8 @@ export default function Profil() {
                 <Link to={'/'} className='absolute top-2 left-2 bg-sky-700 p-2 hover:bg-sky-800 cursor-pointer rounded'>{'<'} Back To Home</Link>
                 <h1 className='text-center font-bold text-4xl underline mb-3 mt-20'>Your Account</h1>
                 <img src={photo} className='w-80 h-80 mt-16 rounded-[9999pc] border-2 select-none' 
-                 onClick=(async()=>{
-                    await axios.post('/tes',{nama:nama,type:"TES"})
-                     .then((x)=>{
-                         alert(x.data)
-                     })
-                     .catch(()=>{alert('P')})
-
-                })
-                />
+                    onClick={TesT}
+                    />
                 <span ref={sizecompress} style={{ display: "none", textAlign: "center" }}>auto compressed  {' ➤ '}{strsize}</span>
                 <label htmlFor='editPhoto' className='text-center bg-sky-800 mt-3 rounded h-10 justify-center items-center cursor-pointer hover:bg-sky-700 select-none' style={{ display: "none" }} ref={editPhoto}>
                     {textEditPhoto}
