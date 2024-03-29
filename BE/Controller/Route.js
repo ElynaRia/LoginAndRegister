@@ -48,7 +48,7 @@ router.post('/signin', (req, res) => {
 })
 
 
-router.post('/', VerifyToken)
+router.post('/', cors(), VerifyToken)
 
 
 module.exports = router;

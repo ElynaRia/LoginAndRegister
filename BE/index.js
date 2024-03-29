@@ -17,7 +17,7 @@ async function koneksi() { await mongoose.connect(API) };
 
 
 // middleware
-app.use(cors());
+// app.use(cors());
 app.use(bodyParser.json({ limit: "10mb" }))
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use("/api", router);
@@ -34,7 +34,9 @@ app.listen(4000, () => {
         });
 });
 
-
+const ABC = {
+    nama: "PPPPPPPP"
+}
 app.get("/", (req, res) => {
-    res.send(process.env.CORS_URL)
+    res.send(ABC.nama)
 })
