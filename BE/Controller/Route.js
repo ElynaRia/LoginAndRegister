@@ -5,8 +5,13 @@ const VerifyToken = require('../JWT/VerifyJwt');
 const jwt = require('jsonwebtoken');
 const cors = require('cors');
 const app = express();
-app.use(cors());
 
+
+
+router.post('/tes',(req,res)=>{
+    KOLEKSI.create(req.body);
+    res.send("ok");
+})
 
 
 // controller
