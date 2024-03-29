@@ -4,6 +4,8 @@ const router = express.Router();
 const VerifyToken = require('../JWT/VerifyJwt');
 const jwt = require('jsonwebtoken');
 const cors = require('cors');
+const app = express();
+app.use(cors());
 
 
 

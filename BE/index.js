@@ -33,10 +33,3 @@ app.listen(4000, () => {
             console.log("FAILED");
         });
 });
-
-const ABC = {
-    nama: "srgs"
-}
-app.get("/", (req, res) => {
-    res.send(ABC.nama)
-})
