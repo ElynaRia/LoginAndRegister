@@ -4,11 +4,12 @@ const express = require('express');
 const router = express.Router();
 const VerifyToken = require('../JWT/VerifyJwt');
 const jwt = require('jsonwebtoken');
+const app = express();
 router.use(cors());
 
 
 // controller
-router.post('/signup', (req, res) => {
+app.post('/api/signup', (req, res) => {
     KOLEKSI.findOne({ nama: req.body.nama })
         .then(x => {
             if (x) {
