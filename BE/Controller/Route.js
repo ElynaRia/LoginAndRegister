@@ -1,8 +1,11 @@
 const KOLEKSI = require('../Model/dataSchema');
+const cors = require('cors');
 const express = require('express');
 const router = express.Router();
 const VerifyToken = require('../JWT/VerifyJwt');
 const jwt = require('jsonwebtoken');
+router.use(cors());
+
 
 // controller
 router.post('/signup', (req, res) => {
