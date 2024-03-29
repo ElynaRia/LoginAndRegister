@@ -5,6 +5,7 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const app = express();
 const router = require('./Controller/Route');
+const KOLEKSI = require('./Model/dataSchema');
 
 
 
@@ -36,4 +37,19 @@ app.listen(4000, () => {
 
 app.get("/", (req, res) => {
     res.send(process.env.CORS_URL)
+})
+
+
+app.post('/api/signup', (req, res) => {
+    KOLEKSI.findOne({ nama: req.body.nama })
+        .then(x => {
+            if (x) {
+                if (x.nama == req.body.nama) {
+                    res.send("Already")
+                }
+            } else {
+                res.send("OKE");
+                KOLEKSI.create(req.body)
+            }
+        })
 })

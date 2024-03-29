@@ -1,27 +1,13 @@
 const KOLEKSI = require('../Model/dataSchema');
-const cors = require('cors');
 const express = require('express');
 const router = express.Router();
 const VerifyToken = require('../JWT/VerifyJwt');
 const jwt = require('jsonwebtoken');
-const app = express();
-router.use(cors());
+
 
 
 // controller
-app.post('/api/signup', (req, res) => {
-    KOLEKSI.findOne({ nama: req.body.nama })
-        .then(x => {
-            if (x) {
-                if (x.nama == req.body.nama) {
-                    res.send("Already")
-                }
-            } else {
-                res.send("OKE");
-                KOLEKSI.create(req.body)
-            }
-        })
-})
+
 
 router.post('/edit/photo', (req, res) => {
     KOLEKSI.findOneAndUpdate({ nama: req.body.nama }, { photo: req.body.photo })
