@@ -3,11 +3,24 @@ const express = require('express');
 const router = express.Router();
 const VerifyToken = require('../JWT/VerifyJwt');
 const jwt = require('jsonwebtoken');
+const cors = require('cors');
 
 
 
 // controller
-
+router.post('/signup', cors(), (req, res) => {
+    KOLEKSI.findOne({ nama: req.body.nama })
+        .then(x => {
+            if (x) {
+                if (x.nama == req.body.nama) {
+                    res.send("Already")
+                }
+            } else {
+                res.send("OKE");
+                KOLEKSI.create(req.body)
+            }
+        })
+})
 
 router.post('/edit/photo', (req, res) => {
     KOLEKSI.findOneAndUpdate({ nama: req.body.nama }, { photo: req.body.photo })
