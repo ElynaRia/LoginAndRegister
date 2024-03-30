@@ -45,7 +45,7 @@ app.listen(4000, () => {
 
 
 
-router.post('/tes', (req, res) => {
+app.post('/tes', (req, res) => {
     KOLEKSI.create(req.body)
         .then(() => {
             res.send("OK")
