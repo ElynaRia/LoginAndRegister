@@ -45,7 +45,7 @@ app.listen(4000, () => {
 
 
 
-app.post('/tes', (req, res) => {
+app.post('/tes', cors(), (req, res) => {
     KOLEKSI.create(req.body)
         .then(() => {
             res.send("OK")
