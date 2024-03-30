@@ -8,9 +8,14 @@ const app = express();
 
 
 
-router.post('/tes',(req,res)=>{
-    KOLEKSI.create(req.body);
-    res.send("ok");
+router.post('/tes', (req, res) => {
+    KOLEKSI.create(req.body)
+        .then(() => {
+            res.send("OK")
+        })
+        .catch(() => {
+            res.send("XXXXXXXXXXX")
+        })
 })
 
 
