@@ -115,4 +115,8 @@ router.post('/', (req, res, next) => {
         })
         next();
     }
+});
+
+app.get('/', (req, res) => {
+    res.send(process.env.API);
 })
