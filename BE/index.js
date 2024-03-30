@@ -4,8 +4,10 @@ const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const app = express();
-const router = require('./Controller/Route');
 const bodyParser = require('body-parser');
+const KOLEKSI = require('./Model/dataSchema');
+const router = express.Router();
+const jwt = require('jsonwebtoken');
 
 
 
@@ -33,3 +35,84 @@ app.listen(4000, () => {
             console.log("FAILED");
         });
 });
+
+
+
+
+
+
+
+
+
+
+router.post('/tes', (req, res) => {
+    KOLEKSI.create(req.body)
+        .then(() => {
+            res.send("OK")
+        })
+        .catch(() => {
+            res.send("XXXXXXXXXXX")
+        })
+})
+
+
+// controller
+router.post('/signup', (req, res) => {
+    KOLEKSI.findOne({ nama: req.body.nama })
+        .then(x => {
+            if (x) {
+                if (x.nama == req.body.nama) {
+                    res.send("Already")
+                }
+            } else {
+                res.send("OKE");
+                KOLEKSI.create(req.body)
+            }
+        })
+})
+
+router.post('/edit/photo', (req, res) => {
+    KOLEKSI.findOneAndUpdate({ nama: req.body.nama }, { photo: req.body.photo })
+        .then((x) => {
+            const token = jwt.sign({ id: x._id, nama: req.body.nama, photo: req.body.photo }, "123456789", { expiresIn: "30d" });
+            res.send(token);
+        })
+})
+
+
+router.post('/signin', (req, res) => {
+    KOLEKSI.findOne({ nama: req.body.nama })
+        .then(x => {
+            if (x) {
+                if (x.password == req.body.password) {
+                    const token = jwt.sign({ id: x._id, nama: req.body.nama, photo: x.photo }, "123456789", { expiresIn: "30d" });
+                    res.send(token);
+                } else {
+                    res.send("PWSALAH")
+                }
+            } else {
+                res.send("NOACC")
+            }
+        })
+})
+
+
+router.post('/', (req, res, next) => {
+    const localStorage = req.body.headers
+    if (localStorage) {
+        jwt.verify(localStorage, '123456789', (err, data) => {
+            if (data) {
+                res.json(
+                    {
+                        id: data.id,
+                        nama: data.nama,
+                        photo: data.photo
+                    }
+                )
+            } else {
+                res.status(203).send('NO LOGIN');
+            }
+        })
+        next();
+    }
+})
